@@ -1,0 +1,158 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class Student {
+public:
+    int rollNo;
+    string name;
+    float marks;
+};
+
+vector<Student> students;
+
+// Function to add a student
+void addStudent() {
+    Student s;
+
+    cout << "\nEnter Roll Number: ";
+    if (!(cin >> s.rollNo)) {
+        cout << "Invalid roll number!\n";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        return;
+    }
+
+    cin.ignore();
+
+    cout << "Enter Name: ";
+    getline(cin, s.name);
+
+    cout << "Enter Marks: ";
+    if (!(cin >> s.marks)) {
+        cout << "Invalid marks!\n";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        return;
+    }
+
+    students.push_back(s);
+
+    cout << "\nStudent added successfully!\n";
+}
+
+// Function to display all students
+void displayStudents() {
+    if (students.empty()) {
+        cout << "\nNo students found.\n";
+        return;
+    }
+
+    cout << "\n===== Student Records =====\n";
+
+    for (const Student& s : students) {
+        cout << "Roll Number: " << s.rollNo << endl;
+        cout << "Name: " << s.name << endl;
+        cout << "Marks: " << s.marks << endl;
+        cout << "--------------------------\n";
+    }
+}
+
+// Function to search for a student
+void searchStudent() {
+    int rollNo;
+
+    cout << "\nEnter Roll Number to search: ";
+
+    if (!(cin >> rollNo)) {
+        cout << "Invalid roll number!\n";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        return;
+    }
+
+    for (const Student& s : students) {
+        if (s.rollNo == rollNo) {
+            cout << "\n===== Student Found =====\n";
+            cout << "Roll Number: " << s.rollNo << endl;
+            cout << "Name: " << s.name << endl;
+            cout << "Marks: " << s.marks << endl;
+            return;
+        }
+    }
+
+    cout << "\nStudent not found.\n";
+}
+
+// Function to delete a student
+void deleteStudent() {
+    int rollNo;
+
+    cout << "\nEnter Roll Number to delete: ";
+
+    if (!(cin >> rollNo)) {
+        cout << "Invalid roll number!\n";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        return;
+    }
+
+    for (auto it = students.begin(); it != students.end(); ++it) {
+        if (it->rollNo == rollNo) {
+            students.erase(it);
+            cout << "\nStudent deleted successfully!\n";
+            return;
+        }
+    }
+
+    cout << "\nStudent not found.\n";
+}
+
+// Main function
+int main() {
+    int choice;
+
+    while (true) {
+        cout << "\n===== Student Management System =====\n";
+        cout << "1. Add Student\n";
+        cout << "2. Display Students\n";
+        cout << "3. Search Student\n";
+        cout << "4. Delete Student\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+
+        // Handle invalid or missing input
+        if (!(cin >> choice)) {
+            cout << "\nInvalid input. Program terminated.\n";
+            break;
+        }
+
+        switch (choice) {
+            case 1:
+                addStudent();
+                break;
+
+            case 2:
+                displayStudents();
+                break;
+
+            case 3:
+                searchStudent();
+                break;
+
+            case 4:
+                deleteStudent();
+                break;
+
+            case 5:
+                cout << "\nThank you for using the Student Management System!\n";
+                return 0;
+
+            default:
+                cout << "\nInvalid choice. Please enter a number from 1 to 5.\n";
+        }
+    }
+
+    return 0;
+}
