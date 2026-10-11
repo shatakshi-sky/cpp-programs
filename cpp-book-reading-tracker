@@ -1,0 +1,100 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string books[100];
+    bool completed[100] = {false};
+    int totalBooks = 0;
+    int choice;
+
+    do {
+        cout << "\n===== BOOK READING TRACKER =====\n";
+        cout << "1. Add a Book\n";
+        cout << "2. View All Books\n";
+        cout << "3. Mark a Book as Completed\n";
+        cout << "4. View Reading Progress\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore(10000, '\n');
+
+        if (choice == 1) {
+            if (totalBooks < 100) {
+                cout << "Enter book title: ";
+                getline(cin, books[totalBooks]);
+
+                completed[totalBooks] = false;
+                totalBooks++;
+
+                cout << "Book added successfully!\n";
+            } else {
+                cout << "Book list is full!\n";
+            }
+        }
+
+        else if (choice == 2) {
+            if (totalBooks == 0) {
+                cout << "No books added yet.\n";
+            } else {
+                cout << "\nYour Books:\n";
+
+                for (int i = 0; i < totalBooks; i++) {
+                    cout << i + 1 << ". " << books[i];
+
+                    if (completed[i]) {
+                        cout << " - Completed";
+                    } else {
+                        cout << " - Reading";
+                    }
+
+                    cout << "\n";
+                }
+            }
+        }
+
+        else if (choice == 3) {
+            if (totalBooks == 0) {
+                cout << "No books available to update.\n";
+            } else {
+                int bookNumber;
+
+                cout << "Enter book number to mark completed: ";
+                cin >> bookNumber;
+
+                if (bookNumber >= 1 && bookNumber <= totalBooks) {
+                    completed[bookNumber - 1] = true;
+                    cout << "Book marked as completed!\n";
+                } else {
+                    cout << "Invalid book number.\n";
+                }
+            }
+        }
+
+        else if (choice == 4) {
+            int finished = 0;
+
+            for (int i = 0; i < totalBooks; i++) {
+                if (completed[i]) {
+                    finished++;
+                }
+            }
+
+            cout << "\nTotal books: " << totalBooks << "\n";
+            cout << "Completed books: " << finished << "\n";
+            cout << "Books in progress: " << totalBooks - finished << "\n";
+        }
+
+        else if (choice == 5) {
+            cout << "Thank you for using Book Reading Tracker!\n";
+        }
+
+        else {
+            cout << "Invalid choice. Please try again.\n";
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
