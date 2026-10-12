@@ -1,0 +1,40 @@
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int totalClasses, attendedClasses;
+
+    cout << "Enter total classes held: ";
+    cin >> totalClasses;
+
+    cout << "Enter classes attended: ";
+    cin >> attendedClasses;
+
+    if (totalClasses <= 0 || attendedClasses < 0 ||
+        attendedClasses > totalClasses) {
+        cout << "Invalid input! Please check your numbers." << endl;
+    }
+    else {
+        double percentage =
+            (attendedClasses * 100.0) / totalClasses;
+
+        cout << "Your attendance: " << percentage << "%" << endl;
+
+        if (percentage >= 75) {
+            cout << "Status: Attendance requirement met!" << endl;
+        }
+        else {
+            int needed = ceil(
+                (0.75 * totalClasses - attendedClasses) / 0.25
+            );
+
+            cout << "Status: Below 75% attendance." << endl;
+            cout << "Attend the next " << needed
+                 << " consecutive classes to reach 75%." << endl;
+        }
+    }
+
+    return 0;
+}
