@@ -1,0 +1,63 @@
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    int player, computer;
+
+    cout << "============================\n";
+    cout << "   ROCK PAPER SCISSORS GAME\n";
+    cout << "============================\n";
+
+    cout << "Choose your move:\n";
+    cout << "1. Rock\n";
+    cout << "2. Paper\n";
+    cout << "3. Scissors\n";
+    cout << "Enter your choice: ";
+    cin >> player;
+
+    if (player < 1 || player > 3) {
+        cout << "Invalid choice! Please select 1, 2, or 3.\n";
+        return 0;
+    }
+
+    computer = rand() % 3 + 1;
+
+    cout << "\nYou chose: ";
+    if (player == 1)
+        cout << "Rock";
+    else if (player == 2)
+        cout << "Paper";
+    else
+        cout << "Scissors";
+
+    cout << "\nComputer chose: ";
+    if (computer == 1)
+        cout << "Rock";
+    else if (computer == 2)
+        cout << "Paper";
+    else
+        cout << "Scissors";
+
+    cout << "\n\n";
+
+    if (player == computer) {
+        cout << "It's a draw!\n";
+    }
+    else if ((player == 1 && computer == 3) ||
+             (player == 2 && computer == 1) ||
+             (player == 3 && computer == 2)) {
+        cout << "Congratulations! You win!\n";
+    }
+    else {
+        cout << "Computer wins! Better luck next time.\n";
+    }
+
+    cout << "\nThanks for playing!\n";
+
+    return 0;
+}
