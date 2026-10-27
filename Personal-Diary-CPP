@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string name;
+    string diary;
+
+    cout << "===== MY PERSONAL DIARY =====" << endl;
+
+    cout << "Enter your name: ";
+    getline(cin, name);
+
+    cout << "\nHello, " << name << "!" << endl;
+    cout << "Write about your day: ";
+    getline(cin, diary);
+
+    cout << "\n===== YOUR DIARY ENTRY =====" << endl;
+    cout << "Name: " << name << endl;
+    cout << "Today's entry: " << diary << endl;
+
+    cout << "\nEntry displayed successfully!" << endl;
+
+    return 0;
+}
